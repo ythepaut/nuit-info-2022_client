@@ -5,7 +5,7 @@ interface Props{
 
 export default function SituationCard(props: Props): JSX.Element {
     return (
-        <div className={`card ${props.color} flex flex-col justify-center items-center` }>
+        <div className={`card ${props.color} flex` }>
             {props.situation}
         </div>
     )
