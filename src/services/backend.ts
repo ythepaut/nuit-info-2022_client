@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { Method } from "axios";
 import { Round } from "../model/round";
 
 function backendUrl(): string {
@@ -9,14 +9,14 @@ function backendUrl(): string {
     }
 }
 
-export async function getRound(): Promise<Round> {
-    return new Promise<Round>(async (resolve, reject) => {
+async function request<T, D>(endpoint: string, method: Method, data?: D, headers?: Record<string, string>): Promise<T> {
+    return new Promise<T>(async (resolve, reject) => {
         await axios
-            .request<Round>({
-                method: "GET",
-                url: backendUrl() + "/",
-                data: {},
-                headers: {},
+            .request<T>({
+                method,
+                url: backendUrl() + endpoint,
+                data,
+                headers,
             })
             .then((response) => {
                 if (response.data) {
@@ -31,4 +31,12 @@ export async function getRound(): Promise<Round> {
                 reject(err);
             });
     });
+}
+
+export async function getRound(): Promise<Round> {
+    return await request<Round, void>("/round", "GET");
+}
+
+export async function postRound(round: Round): Promise<Round> {
+    return await request<Round, Round>("/round", "POST", round);
 }
