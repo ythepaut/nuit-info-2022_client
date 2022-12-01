@@ -5,7 +5,7 @@ const nextConfig = require("next-pwa")({
 
 module.exports = nextConfig({
     publicRuntimeConfig: {},
-    reactStrictMode: true,
+    reactStrictMode: false,
     swcMinify: true,
     i18n: {
         locales: ["fr", "en"],
