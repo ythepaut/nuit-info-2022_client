@@ -3,9 +3,18 @@ import ResponseCard from "../components/cards/ResponseCard";
 
 export default function Index(): JSX.Element {
     return (
-        <div className={"flex justify-center items-center"}>
-            <SituationCard situation={"Veux tu choper le SIDA ?"} color={"bg-gray-500"}/>
-            <ResponseCard color={"bg-gray-200"} response={"oui bien sur"}/>
+        <div className={"flex flex-col h-screen space-y-8"}>
+            <div className={"flex justify-center items-center mt-4"}>
+                <SituationCard situation={"Test ?"} color={"bg-gray-500"}/>
+            </div>
+            <div className="absolute bottom-3 w-full">
+                <div className={"flex flex-row space-x-5 bottom-5 justify-center"}>
+                    <ResponseCard color={"bg-gray-200"} response={"oui bien sur"}/>
+                    <ResponseCard color={"bg-gray-200"} response={"non bien sur"}/>
+                    <ResponseCard color={"bg-gray-200"} response={"peut etre bien sur"}/>
+                    <ResponseCard color={"bg-gray-200"} response={"jsp bien sur"}/>
+                </div>
+            </div>
         </div>
     )
 }
