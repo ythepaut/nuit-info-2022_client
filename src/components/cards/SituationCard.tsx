@@ -8,5 +8,5 @@ export default function SituationCard(props: Props): JSX.Element {
         <div className={`card ${props.color} flex` }>
             {props.situation}
         </div>
-    )
+    );
 }

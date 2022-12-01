@@ -18,5 +18,5 @@ export default function Index(): JSX.Element {
                 </div>
             </div>
         </div>
-    )
+    );
 }
