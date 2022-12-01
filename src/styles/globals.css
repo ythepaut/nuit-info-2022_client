@@ -12,11 +12,11 @@
         scroll-behavior: smooth;
     }
 
-    .bg-hero {
-        background-image: linear-gradient(141deg, #112a37, #253d59 72%, #263965);
+    .card {
+        @apply rounded-3xl w-56 h-72 overflow-hidden text-clip p-4
     }
 
-    .hero-link {
-        @apply text-xl text-indigo-100 tracking-wide cursor-pointer transform transition hover:text-white hover:scale-110;
+    .fantom-card {
+        @apply rounded-3xl w-56 h-72 border-4 border-dashed
     }
 }
