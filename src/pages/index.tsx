@@ -7,7 +7,7 @@ import Sidebar from "../components/Sidebar";
 import { Disease } from "../model/disease";
 import Modal from "../components/Modal";
 import RerollButton from "../components/RerollButton";
-import { postRound, startRound } from "../services/backend";
+import { postRound, reroll, startRound } from "../services/backend";
 
 export default function Index(): JSX.Element {
     const [situationCard, setSituationCard] = useState<SCard>();
@@ -88,7 +88,13 @@ export default function Index(): JSX.Element {
 
             {modal && changeModal()}
 
-            <RerollButton />
+            <RerollButton
+                onClick={() => {
+                    reroll().then((cards) => {
+                        setHand(cards);
+                    });
+                }}
+            />
         </>
     );
 }

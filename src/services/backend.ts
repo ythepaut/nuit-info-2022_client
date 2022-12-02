@@ -44,6 +44,6 @@ export async function postRound(remainingCards: RCard[]): Promise<NewRound> {
     });
 }
 
-export async function reroll(remainingCards: SCard[]): Promise<SCard[]> {
+export async function reroll(): Promise<SCard[]> {
     return request<SCard[], void>("/card/reroll", "GET");
 }
