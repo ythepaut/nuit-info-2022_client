@@ -5,5 +5,9 @@ interface Props {
 }
 
 export default function SituationCard(props: Props): JSX.Element {
-    return <div className="card bg-gray-600 flex">{props.card ? props.card.message : ""}</div>;
+    return (
+        <div className="card shadow-lg bg-gray-600 flex">
+            <p className={"font-bold text-xl text-gray-200"}>{props.card ? props.card.message : ""}</p>
+        </div>
+    );
 }

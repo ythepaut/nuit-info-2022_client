@@ -42,7 +42,7 @@ export default function Index(): JSX.Element {
     };
 
     return (
-        <>
+        <div className={""}>
             <Sidebar diseases={diseases} />
             <div className="flex flex-col h-screen space-y-8">
                 <div className="flex flex-row space-x-12 justify-center items-center mt-4">
