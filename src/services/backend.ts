@@ -1,5 +1,5 @@
 import axios, { Method } from "axios";
-import { Card } from "../model/card";
+import { SCard } from "../model/card";
 import { Round } from "../model/round";
 
 function backendUrl(): string {
@@ -38,12 +38,12 @@ export async function startRound(): Promise<Round> {
     return request<Round, void>("/card/startround", "GET");
 }
 
-export async function postRound(remainingCards: Card[]): Promise<Round> {
-    return request<Round, { remainingCards: Card[] }>("/card/round", "POST", {
+export async function postRound(remainingCards: SCard[]): Promise<Round> {
+    return request<Round, { remainingCards: SCard[] }>("/card/round", "POST", {
         remainingCards,
     });
 }
 
-export async function reroll(remainingCards: Card[]): Promise<Card[]> {
-    return request<Card[], void>("/card/reroll", "GET");
+export async function reroll(remainingCards: SCard[]): Promise<SCard[]> {
+    return request<SCard[], void>("/card/reroll", "GET");
 }
