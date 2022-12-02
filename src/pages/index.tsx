@@ -79,6 +79,7 @@ export default function Index(): JSX.Element {
                             const newHand = hand.filter((card) => card.message != selectedCard!.message);
                             newHand.push(round.responseCard);
                             setHand(newHand);
+                            setModal(false);
                         });
                     }}
                 />
