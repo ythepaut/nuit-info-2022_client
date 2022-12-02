@@ -6,6 +6,7 @@ import ResponseCard from "../components/cards/ResponseCard";
 import Sidebar from "../components/Sidebar";
 import { Disease } from "../model/disease";
 import Modal from "../components/Modal";
+import RerollButton from "../components/RerollButton";
 
 export default function Index(): JSX.Element {
     const [situationCard, setSituationCard] = useState<SCard>();
@@ -89,6 +90,7 @@ export default function Index(): JSX.Element {
                 changeModal()
             }
 
+            <RerollButton />
         </>
     );
 }
