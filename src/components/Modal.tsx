@@ -4,11 +4,10 @@ interface Props {
 }
 
 export default function Modal(props: Props): JSX.Element {
-    function closeModal() {
+    const closeModal = () => {
         const elementById = document.getElementById("modalShow");
         elementById!.className = elementById!.className.replace("modal-open", "");
-        console.log(elementById!.className);
-    }
+    };
 
     return (
         <>
