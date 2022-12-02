@@ -2,6 +2,7 @@ import SituationCard from "../components/cards/SituationCard";
 import FantomCard from "../components/cards/FantomCard";
 import { useEffect, useState } from "react";
 import { RCard, SCard } from "../model/card";
+import ResponseCard from "../components/cards/ResponseCard";
 
 export default function Index(): JSX.Element {
     const [situationCard, setSituationCard] = useState<SCard>();
@@ -57,6 +58,6 @@ export default function Index(): JSX.Element {
                         })}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
