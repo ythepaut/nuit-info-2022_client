@@ -1,6 +1,6 @@
-import { Card } from "./card";
+import { RCard, SCard } from "./card";
 
 export interface Round {
-    situationCard: Card;
-    responseCards: Card[];
+    situationCard: SCard;
+    responseCards: RCard[];
 }
