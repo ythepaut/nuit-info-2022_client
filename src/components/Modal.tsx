@@ -1,12 +1,14 @@
 interface Props {
     name: string;
     message: string;
+    closeCallback: () => void;
 }
 
 export default function Modal(props: Props): JSX.Element {
     const closeModal = () => {
         const elementById = document.getElementById("modalShow");
         elementById!.className = elementById!.className.replace("modal-open", "");
+        props.closeCallback();
     };
 
     return (

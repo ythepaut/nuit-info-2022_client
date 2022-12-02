@@ -7,7 +7,7 @@ import Sidebar from "../components/Sidebar";
 import { Disease } from "../model/disease";
 import Modal from "../components/Modal";
 import RerollButton from "../components/RerollButton";
-import { startRound } from "../services/backend";
+import { postRound, startRound } from "../services/backend";
 
 export default function Index(): JSX.Element {
     const [situationCard, setSituationCard] = useState<SCard>();
@@ -30,6 +30,11 @@ export default function Index(): JSX.Element {
         setSelectedCard(hand[index]);
     };
 
+    useEffect(() => {
+        if (!selectedCard) return;
+        setTimeout(showModal, 500);
+    }, [selectedCard]);
+
     const [modal, setModal] = useState<boolean>(false);
 
     const showModal = () => {
@@ -37,7 +42,21 @@ export default function Index(): JSX.Element {
     };
 
     const changeModal = () => {
-        return <Modal name="Sida" message="Freddy, tu me manques ... ;(" />;
+        return (
+            <Modal
+                name="Titre"
+                message="Description"
+                closeCallback={() => {
+                    postRound(hand.filter((card) => card.message != selectedCard!.message)).then((round) => {
+                        setSelectedCard(null);
+                        setSituationCard(round.situationCard);
+                        const newHand = hand.filter((card) => card.message != selectedCard!.message);
+                        newHand.push(round.responseCard);
+                        setHand(newHand);
+                    });
+                }}
+            />
+        );
     };
 
     return (
@@ -53,15 +72,16 @@ export default function Index(): JSX.Element {
 
                 <div className="absolute bottom-3 w-full">
                     <div className="flex flex-row space-x-5 bottom-5 justify-center">
-                        {hand
-                            .filter((card) => selectedCard === null || card.description !== selectedCard.description)
-                            .map((card, index) => {
-                                return (
-                                    <div key={index} onClick={() => moveCard(index)}>
-                                        <ResponseCard card={card} />
-                                    </div>
-                                );
-                            })}
+                        {hand &&
+                            hand
+                                .filter((card) => selectedCard === null || card.message !== selectedCard.message)
+                                .map((card, index) => {
+                                    return (
+                                        <div key={index} onClick={() => moveCard(index)}>
+                                            <ResponseCard card={card} />
+                                        </div>
+                                    );
+                                })}
                     </div>
                 </div>
             </div>

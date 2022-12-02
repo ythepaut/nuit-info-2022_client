@@ -1,6 +1,6 @@
 import axios, { Method } from "axios";
-import { SCard } from "../model/card";
-import { Round } from "../model/round";
+import { RCard, SCard } from "../model/card";
+import { NewRound, Round } from "../model/round";
 
 function backendUrl(): string {
     if (process.env.NEXT_PUBLIC_BACKEND_URL) {
@@ -38,8 +38,8 @@ export async function startRound(): Promise<Round> {
     return request<Round, void>("/card/startround", "GET");
 }
 
-export async function postRound(remainingCards: SCard[]): Promise<Round> {
-    return request<Round, { remainingCards: SCard[] }>("/card/round", "POST", {
+export async function postRound(remainingCards: RCard[]): Promise<NewRound> {
+    return request<NewRound, { remainingCards: RCard[] }>("/card/round", "POST", {
         remainingCards,
     });
 }
