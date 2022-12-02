@@ -1,6 +1,8 @@
 import { Disease } from "../model/disease";
 import ReactTooltip from "react-tooltip";
 import ReactDOMServer from "react-dom/server";
+import logo from '../../public/icons/MSTIcons/VIHIcon.png';
+
 
 interface Props {
     disease: Disease;
@@ -23,7 +25,9 @@ export default function DiseaseIcon(props: Props): JSX.Element {
                 className="w-16 h-16 rounded-2xl bg-pink-400"
                 data-html={true}
                 data-tip={ReactDOMServer.renderToString(<DiseaseTooltip disease={props.disease} />)}
-            ></div>
+            >
+                <img src={logo.src} alt="Logo" />
+            </div>
             <ReactTooltip backgroundColor="white" place="left" effect="solid" />
         </div>
     );
