@@ -52,6 +52,13 @@ export default function Index(): JSX.Element {
         console.log(newDiseasesTmp);
     }, [selectedCard]);
 
+    useEffect(() => {
+        if (diseases.length >= 5) {
+            alert("Vous êtes mort, oups, easter egg ! 🥚");
+            setDiseases([]);
+        }
+    }, [diseases]);
+
     const [modal, setModal] = useState<boolean>(false);
 
     const showModal = () => {
@@ -87,8 +94,8 @@ export default function Index(): JSX.Element {
 
             {modal && (
                 <Modal
-                    name="Titre"
-                    message="Description"
+                    name="Nous avons peut-être trouvé des maladies !"
+                    message="C'est dommage, ou peut-être pas, votre réponse a peut-être permis de trouver des maladies !"
                     closeCallback={() => {
                         postRound(hand.filter((card) => card.message != selectedCard!.message)).then((round) => {
                             setSelectedCard(null);
