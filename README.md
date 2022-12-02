@@ -1,5 +1,11 @@
 # Nuit de l'info 2022 - Client
 
+## Principe de notre application
+
+Notre Application est un jeu sérieux inspiré du jeu limite limite, mais autour du thèmes des MST. 
+Il a pour but de s'adresser à des jeunes de 16 à 25 ans, pour découvrir et prévenir des risques liés au MST.
+A chaque tour, une question lui est posé, et il doit choisir sa réponse parmit les 4 cartes qu'ils possèdent. Si il se trompe, celui-ci attrape les MST desquels ils n'a pas réussi à se protéger.
+
 ## Installation
 
 ```bash
@@ -37,6 +43,7 @@ Nous avons abandonné ce défi.
 Dans l'optique de respecter une convention de nommage des branches et des commits, nous avons mis en place un code de conduite git basé sur le modèle de [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 Ce qui nous a permis d'assurer un constant respect de la convention de nommage des branches et des commits.
 Pour la répartition du travail, aillant travaillé principalement en pair programming, la répartition du travail peut sembler déséquilibrée, bien que ce ne fut pas réellement le cas.
+Nous avons choisi comme gitflow le système de branche par fonctionnalité (cf. https://www.atlassian.com/fr/git/tutorials/comparing-workflows/feature-branch-workflow).
 
 ### Défi 3 : Du propre
 
