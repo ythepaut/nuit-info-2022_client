@@ -2,6 +2,7 @@ import SituationCard from "../components/cards/SituationCard";
 import ResponseCard from "../components/cards/ResponseCard";
 import FantomCard from "../components/cards/FantomCard";
 import Sidebar from "../components/Sidebar";
+import RerollButton from "../components/RerollButton";
 
 export default function Index(): JSX.Element {
     return (
@@ -29,6 +30,7 @@ export default function Index(): JSX.Element {
                     </div>
                 </div>
             </div>
+            <RerollButton />
         </>
     );
 }
