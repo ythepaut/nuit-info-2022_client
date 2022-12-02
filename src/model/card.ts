@@ -1,5 +1,5 @@
 export interface Card {
-    description: string;
+    message: string;
 }
 
 export interface SCard extends Card {

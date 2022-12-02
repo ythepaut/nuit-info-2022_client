@@ -7,6 +7,7 @@ import Sidebar from "../components/Sidebar";
 import { Disease } from "../model/disease";
 import Modal from "../components/Modal";
 import RerollButton from "../components/RerollButton";
+import { postRound, reroll, startRound } from "../services/backend";
 
 export default function Index(): JSX.Element {
     const [situationCard, setSituationCard] = useState<SCard>();
@@ -17,23 +18,9 @@ export default function Index(): JSX.Element {
     const [diseases, setDiseases] = useState<Disease[]>([]);
 
     useEffect(() => {
-        setHand([
-            {
-                description: "Oui 1",
-            },
-            {
-                description: "Oui 2",
-            },
-            {
-                description: "Non 1",
-            },
-            {
-                description: "Non 2",
-            },
-        ]);
-        setSituationCard({
-            description: "Ceci est une situation...",
-            diseases: ["Maladie A", "Maladie B"],
+        startRound().then((round) => {
+            setHand(round.responseCards);
+            setSituationCard(round.situationCard);
         });
         setDiseases([{ name: "A", description: ["AAAAAAAAAAAAAA"], icon: "" }]);
     }, []);
@@ -43,6 +30,10 @@ export default function Index(): JSX.Element {
         setSelectedCard(hand[index]);
     };
 
+    useEffect(() => {
+        if (!selectedCard) return;
+        setTimeout(showModal, 500);
+    }, [selectedCard]);
 
     const [modal, setModal] = useState<boolean>(false);
 
@@ -52,13 +43,21 @@ export default function Index(): JSX.Element {
 
     const changeModal = () => {
         return (
-            <Modal name={"Sida"} message={"Freddy, tu me manques ... ;("}/>
+            <Modal
+                name="Titre"
+                message="Description"
+                closeCallback={() => {
+                    postRound(hand.filter((card) => card.message != selectedCard!.message)).then((round) => {
+                        setSelectedCard(null);
+                        setSituationCard(round.situationCard);
+                        const newHand = hand.filter((card) => card.message != selectedCard!.message);
+                        newHand.push(round.responseCard);
+                        setHand(newHand);
+                    });
+                }}
+            />
         );
     };
-
-    useEffect(() => {
-        setTimeout(() => showModal(), 1000);
-    }, []);
 
     return (
         <>
@@ -73,24 +72,29 @@ export default function Index(): JSX.Element {
 
                 <div className="absolute bottom-3 w-full">
                     <div className="flex flex-row space-x-5 bottom-5 justify-center">
-                        {hand
-                            .filter((card) => selectedCard === null || card.description !== selectedCard.description)
-                            .map((card, index) => {
-                                return (
-                                    <div key={index} onClick={() => moveCard(index)}>
-                                        <ResponseCard card={card} />
-                                    </div>
-                                );
-                            })}
+                        {hand &&
+                            hand
+                                .filter((card) => selectedCard === null || card.message !== selectedCard.message)
+                                .map((card, index) => {
+                                    return (
+                                        <div key={index} onClick={() => moveCard(index)}>
+                                            <ResponseCard card={card} />
+                                        </div>
+                                    );
+                                })}
                     </div>
                 </div>
             </div>
 
-            {modal &&
-                changeModal()
-            }
+            {modal && changeModal()}
 
-            <RerollButton />
+            <RerollButton
+                onClick={() => {
+                    reroll().then((cards) => {
+                        setHand(cards);
+                    });
+                }}
+            />
         </>
     );
 }
