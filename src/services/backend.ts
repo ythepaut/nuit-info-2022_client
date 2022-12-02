@@ -1,9 +1,10 @@
 import axios, { Method } from "axios";
+import { Card } from "../model/card";
 import { Round } from "../model/round";
 
 function backendUrl(): string {
     if (process.env.NEXT_PUBLIC_BACKEND_URL) {
-        return process.env.NEXT_PUBLIC_BACKEND_URL;
+        return process.env.NEXT_PUBLIC_BACKEND_URL + "/api";
     } else {
         throw new Error("No backend url in environment");
     }
@@ -33,10 +34,16 @@ async function request<T, D>(endpoint: string, method: Method, data?: D, headers
     });
 }
 
-export async function getRound(): Promise<Round> {
-    return request<Round, void>("/round", "GET");
+export async function startRound(): Promise<Round> {
+    return request<Round, void>("/card/startround", "GET");
 }
 
-export async function postRound(round: Round): Promise<Round> {
-    return request<Round, Round>("/round", "POST", round);
+export async function postRound(remainingCards: Card[]): Promise<Round> {
+    return request<Round, { remainingCards: Card[] }>("/card/round", "POST", {
+        remainingCards,
+    });
+}
+
+export async function reroll(remainingCards: Card[]): Promise<Card[]> {
+    return request<Card[], void>("/card/reroll", "GET");
 }
