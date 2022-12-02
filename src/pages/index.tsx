@@ -22,7 +22,7 @@ export default function Index(): JSX.Element {
             setHand(round.responseCards);
             setSituationCard(round.situationCard);
         });
-        setDiseases([Diseases.HIV]);
+        setDiseases([]);
     }, []);
 
     const moveCard = (index: number) => {
