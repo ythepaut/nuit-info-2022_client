@@ -5,6 +5,7 @@ import { RCard, SCard } from "../model/card";
 import ResponseCard from "../components/cards/ResponseCard";
 import Sidebar from "../components/Sidebar";
 import { Disease } from "../model/disease";
+import Modal from "../components/Modal";
 
 export default function Index(): JSX.Element {
     const [situationCard, setSituationCard] = useState<SCard>();
@@ -41,6 +42,23 @@ export default function Index(): JSX.Element {
         setSelectedCard(hand[index]);
     };
 
+
+    const [modal, setModal] = useState<boolean>(false);
+
+    const showModal = () => {
+        setModal(true);
+    };
+
+    const changeModal = () => {
+        return (
+            <Modal name={"Sida"} message={"Freddy, tu me manques ... ;("}/>
+        );
+    };
+
+    useEffect(() => {
+        setTimeout(() => showModal(), 1000);
+    }, []);
+
     return (
         <>
             <Sidebar diseases={diseases} />
@@ -66,6 +84,11 @@ export default function Index(): JSX.Element {
                     </div>
                 </div>
             </div>
+
+            {modal &&
+                changeModal()
+            }
+
         </>
     );
 }
