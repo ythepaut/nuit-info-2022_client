@@ -22,6 +22,6 @@
     }
 
     .fantom-card {
-        @apply rounded-3xl w-56 h-72 border-4 border-gray-500 border-dashed;
+        @apply rounded-3xl w-56 h-72 border-4 border-white border-dashed;
     }
 }
