@@ -34,9 +34,9 @@ async function request<T, D>(endpoint: string, method: Method, data?: D, headers
 }
 
 export async function getRound(): Promise<Round> {
-    return await request<Round, void>("/round", "GET");
+    return request<Round, void>("/round", "GET");
 }
 
 export async function postRound(round: Round): Promise<Round> {
-    return await request<Round, Round>("/round", "POST", round);
+    return request<Round, Round>("/round", "POST", round);
 }
