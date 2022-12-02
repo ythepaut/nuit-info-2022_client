@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { RCard, SCard } from "../model/card";
 import ResponseCard from "../components/cards/ResponseCard";
 import Sidebar from "../components/Sidebar";
-import { Disease } from "../model/disease";
+import { Disease, Diseases } from "../model/disease";
 import Modal from "../components/Modal";
 import RerollButton from "../components/RerollButton";
 import { postRound, reroll, startRound } from "../services/backend";
@@ -22,7 +22,7 @@ export default function Index(): JSX.Element {
             setHand(round.responseCards);
             setSituationCard(round.situationCard);
         });
-        setDiseases([{ name: "A", description: ["AAAAAAAAAAAAAA"], icon: "" }]);
+        setDiseases([Diseases.HIV]);
     }, []);
 
     const moveCard = (index: number) => {
@@ -39,24 +39,6 @@ export default function Index(): JSX.Element {
 
     const showModal = () => {
         setModal(true);
-    };
-
-    const changeModal = () => {
-        return (
-            <Modal
-                name="Titre"
-                message="Description"
-                closeCallback={() => {
-                    postRound(hand.filter((card) => card.message != selectedCard!.message)).then((round) => {
-                        setSelectedCard(null);
-                        setSituationCard(round.situationCard);
-                        const newHand = hand.filter((card) => card.message != selectedCard!.message);
-                        newHand.push(round.responseCard);
-                        setHand(newHand);
-                    });
-                }}
-            />
-        );
     };
 
     return (
@@ -86,7 +68,21 @@ export default function Index(): JSX.Element {
                 </div>
             </div>
 
-            {modal && changeModal()}
+            {modal && (
+                <Modal
+                    name="Titre"
+                    message="Description"
+                    closeCallback={() => {
+                        postRound(hand.filter((card) => card.message != selectedCard!.message)).then((round) => {
+                            setSelectedCard(null);
+                            setSituationCard(round.situationCard);
+                            const newHand = hand.filter((card) => card.message != selectedCard!.message);
+                            newHand.push(round.responseCard);
+                            setHand(newHand);
+                        });
+                    }}
+                />
+            )}
 
             <RerollButton
                 onClick={() => {
