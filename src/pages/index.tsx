@@ -30,9 +30,26 @@ export default function Index(): JSX.Element {
         setSelectedCard(hand[index]);
     };
 
+    const [newDiseases, setNewDiseases] = useState<Disease[]>([]);
+
     useEffect(() => {
         if (!selectedCard) return;
         setTimeout(showModal, 500);
+        let newDiseasesStr: string[] = [];
+        situationCard?.diseases.forEach((disease) => {
+            if (!selectedCard.diseases.includes(disease)) {
+                newDiseasesStr.push(disease);
+            }
+        });
+        let newDiseasesTmp: Disease[] = [];
+        newDiseasesStr
+            .map((s) => s.replaceAll(" ", "_"))
+            // @ts-ignore
+            .map((s) => Diseases[s])
+            .forEach((disease) => newDiseases.push(disease));
+        setNewDiseases(newDiseasesTmp);
+        setDiseases(diseases.concat(newDiseases));
+        console.log(newDiseasesTmp);
     }, [selectedCard]);
 
     const [modal, setModal] = useState<boolean>(false);

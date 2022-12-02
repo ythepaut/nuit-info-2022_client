@@ -6,4 +6,6 @@ export interface SCard extends Card {
     diseases: string[];
 }
 
-export interface RCard extends Card {}
+export interface RCard extends Card {
+    diseases: string[];
+}
