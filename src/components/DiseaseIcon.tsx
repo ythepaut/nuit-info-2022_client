@@ -1,7 +1,7 @@
 import { Disease } from "../model/disease";
 import ReactTooltip from "react-tooltip";
 import ReactDOMServer from "react-dom/server";
-import logo from '../../public/icons/MSTIcons/VIHIcon.png';
+import logo from "../../public/icons/MSTIcons/VIHIcon.png";
 
 
 interface Props {
